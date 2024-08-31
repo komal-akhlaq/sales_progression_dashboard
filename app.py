@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 
 # Database connection parameters
 db_params = {
-    'dbname': 'd5pt3225ki095v',
-    'user': 'uchk5knobsqvs7',
-    'password': 'pb82e547f1beee9040983d54a568e419b3d91a76ea16d6aaedd49b5fb41f1bcfe',
-    'host': 'ec2-23-20-93-193.compute-1.amazonaws.com',
-    'port': '5432'
+    'dbname': st.secrets["database"]["DB_NAME"],
+    'user': st.secrets["database"]["DB_USER"],
+    'password': st.secrets["database"]["DB_PASSWORD"],
+    'host': st.secrets["database"]["DB_HOST"],
+    'port': st.secrets["database"]["DB_PORT"]
 }
 
 # SQL query to fetch the required records (excluding the client_status logic)
