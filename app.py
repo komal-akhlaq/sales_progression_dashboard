@@ -3,7 +3,7 @@ from sales_leads import show_sales_leads
 from client_stage_progression import show_client_stage_progression
 from low_sales_progression import show_low_sales_progression
 from streamlit_autorefresh import st_autorefresh
-from may_accounts_monitor import show_may_accounts_monitor
+from may_accounts_monitor import show_recent_clients
 
 favicon = "2.png"
 st.set_page_config(page_title='Homeeasy Sales Dashboard', page_icon=favicon, layout='wide', initial_sidebar_state='auto')
@@ -23,6 +23,6 @@ if page == "Sales Leads Monitoring":
 elif page == "Client Stage Progression Report":
     show_client_stage_progression()
 elif page == "May Account Assigned Clients":
-    show_may_accounts_monitor()
+    show_recent_clients()
 else:
     show_low_sales_progression()
