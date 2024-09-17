@@ -3,7 +3,7 @@ import psycopg2
 import csv
 import pandas as pd
 import json
-
+import streamlit as st
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
@@ -38,12 +38,12 @@ print(f"End time: {end_time_str}")
 # reading clients.csv
 # Database connection parameters
 db_params = {
-    'dbname': 'd5pt3225ki095v',
-    'user': 'uchk5knobsqvs7',
-    'password': 'pb82e547f1beee9040983d54a568e419b3d91a76ea16d6aaedd49b5fb41f1bcfe',
-    'host': 'ec2-23-20-93-193.compute-1.amazonaws.com',
-    'port': '5432'
-}
+        'dbname': st.secrets["database"]["DB_NAME"],
+        'user': st.secrets["database"]["DB_USER"],
+        'password': st.secrets["database"]["DB_PASSWORD"],
+        'host': st.secrets["database"]["DB_HOST"],
+        'port': st.secrets["database"]["DB_PORT"]
+    }
 
 # SQL query template to fetch distinct client IDs and names for the past month
 fetch_client_ids_query = """
