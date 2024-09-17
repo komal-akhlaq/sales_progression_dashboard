@@ -1,23 +1,19 @@
 import os
-
-try:
-    import psycopg2
-except:
-    os.system('pip install -qqq psycopg2')
-    import psycopg2
+import psycopg2
 import csv
-try:
-    import pandas as pd
-except:
-    os.system('pip install pandas')
-    import pandas as pd
+import pandas as pd
 import json
 
-import os
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
 
-os.system('pip install -qqq reportlab')
 
 from datetime import datetime, timedelta
+
+# List of employee names
+employee_names = ['Mukund Chopra','John Green', 'Sara Edward','Ryan Rehman','Omar Blake','Simon Sinek','Daniel Robinson', 'Moohi Ahmed','Waseem Zubair','Alina Victor']
 
 # defining the time
 # Calculate the time range for the past 24 hours
@@ -40,10 +36,6 @@ print(f"End time: {end_time_str}")
 """# Reading from database"""
 
 # reading clients.csv
-
-import psycopg2
-import csv
-
 # Database connection parameters
 db_params = {
     'dbname': 'd5pt3225ki095v',
@@ -119,29 +111,8 @@ def fetch_client_ids_and_names():
         if connection:
             connection.close()
 
-# List of employee names
-employee_names = ['Mukund Chopra','John Green', 'Sara Edward','Ryan Rehman','Travis Keane', 'Maida Adams', 'Moohi Ahmed','Waseem Zubair','Alina Victor']
-
 # Run the function to fetch client IDs and names and save to CSV
 fetch_client_ids_and_names()
-
-# Employee Records
-
-import psycopg2
-import csv
-from datetime import datetime, timedelta
-
-# List of employee names
-employee_names = ['Mukund Chopra','John Green', 'Sara Edward','Ryan Rehman','Omar Blake','Simon Sinek','Daniel Robinson', 'Moohi Ahmed','Waseem Zubair','Alina Victor']
-
-# Database connection parameters
-db_params = {
-    'dbname': 'd5pt3225ki095v',
-    'user': 'uchk5knobsqvs7',
-    'password': 'pb82e547f1beee9040983d54a568e419b3d91a76ea16d6aaedd49b5fb41f1bcfe',
-    'host': 'ec2-23-20-93-193.compute-1.amazonaws.com',
-    'port': '5432'
-}
 
 # SQL query template to fetch the required records for the specified time range
 fetch_records_query_template = f"""
@@ -239,20 +210,6 @@ def fetch_and_save_records_to_csv():
 fetch_and_save_records_to_csv()
 
 """# Employee Progress (New)"""
-
-import psycopg2
-import csv
-
-# Database connection parameters
-db_params = {
-    'dbname': 'd5pt3225ki095v',
-    'user': 'uchk5knobsqvs7',
-    'password': 'pb82e547f1beee9040983d54a568e419b3d91a76ea16d6aaedd49b5fb41f1bcfe',
-    'host': 'ec2-23-20-93-193.compute-1.amazonaws.com',
-    'port': '5432'
-}
-
-
 
 def run_query_and_save_to_csv(sql_query, csv_file_name):
     connection = None
@@ -414,12 +371,6 @@ for index, row in df.iterrows():
 df.drop('time_stamp', axis=1, inplace=True)
 
 """## Report generation (New)"""
-
-import pandas as pd
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib import colors
 
 # Constants
 ASSIGNED_MINUTES = 480  # 8 hours in minutes
